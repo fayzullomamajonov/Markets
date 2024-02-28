@@ -1,16 +1,17 @@
 <h1>Market agents</h1>
 <hr>
-<img
+<div style="display:flax;">
+  <img
   src="/static/images/1.jpg"
   alt="Alt text"
   title="Optional title"
   style="display: inline-block; margin: 30 auto; max-width: 300px">
-  <hr>
 <img
   src="/static/images/2.jpg"
   alt="Alt text"
   title="Optional title"
   style="display: inline-block; margin: 30 auto; max-width: 300px">
+</div>
   <hr>
 <img
   src="/static/images/3.jpg"
