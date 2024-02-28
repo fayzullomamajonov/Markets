@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% load static %} {% load i18n %} {% block content %}
+{% load crispy_forms_tags %} 
+
+<link rel="stylesheet" href="{% static 'styles/add_client.css' %}" /> 
+  <div class="container-fluid">
+      <div class="card-page">
+        <div class="head-card">
+          <img class="img-icon" src="{% static 'images/icon.png' %}" alt="icon">
+          <div class="text-center">
+          <h3 class="card-title">{% trans 'Mahsulot sotish' %}</h3>
+          <p class="card-description">{{ client.name }} {{client.surename}}</p>
+          </div>
+        </div>
+      <form class="form-class" action="{% url 'to_sell_page' client.pk %}" method="POST">
+        {% csrf_token %}
+            {{form|crispy}}
+            <div class="inline">
+          <div class="nav justify-content-end">
+            <a class="nav-link" href="{% url 'add_unit' %}">{% trans 'Birlik qo`shish' %}</a>
+          </div>   
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <input class="btn btn-primary stretched-link"  type="submit" value={% trans 'Saqlash' %} />
+        </div>
+      </div>
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

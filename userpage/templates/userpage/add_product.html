@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% load static %} {% load i18n %} {% load crispy_forms_tags %} 
+{%block content %}
+{% block extra_head %}
+
+{% endblock %}
+<link rel="stylesheet" href="{% static 'styles/add_client.css' %}" /> 
+  <div class="container-fluid">
+      <div class="card-page">
+        <div class="head-card text-center">
+          <img class="img-icon" src="{% static 'images/icon.png' %}" alt="icon">
+          <h3 class="card-title-center">{% trans "O`lchov birligi" %}</h3>
+          <p class="card-description-center">{% trans "Mahsul turiga mos o`lchov birligi kiriting" %}</p>
+        </div>
+      <form class="form-class" action="{% url 'add_product' %}" method="POST">
+        {% csrf_token %}
+            {{form|crispy}}
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <input class="btn btn-primary stretched-link"  type="submit" value={% trans 'Saqlash' %} />
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

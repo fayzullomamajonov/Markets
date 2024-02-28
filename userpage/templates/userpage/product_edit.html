@@ -1,0 +1,25 @@
+{% extends 'base.html' %}{% load crispy_forms_tags %} 
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles/add_client.css' %}" /> 
+  <div class="container-fluid">
+      <div class="card-page">
+        <div class="head-card">
+          <img class="img-icon" src="{% static 'images/icon.png' %}" alt="icon">
+          <div class="text-center">
+          <h3 class="card-title">{% trans 'Mahsulotni Tahrirlash' %}</h3>
+          <p class="card-description">{% trans 'Mahsulot parametrlarini o`zgartirish yoki qo`shimcha kiritish' %}</p>
+        </div>
+        </div>
+      <form class="form-class" method="POST">
+        {% csrf_token %}
+        {{form|crispy}}
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <input class="btn btn-primary stretched-link"  type="submit" value={% trans 'Saqlash' %} />
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

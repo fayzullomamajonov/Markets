@@ -1,0 +1,582 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-07 17:44+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\adminpage\forms.py:18 .\adminpage\forms.py:37 .\userpage\forms.py:45
+#: .\userpage\forms.py:71
+msgid "Ism"
+msgstr "Имя"
+
+#: .\adminpage\forms.py:19 .\adminpage\forms.py:38 .\userpage\forms.py:46
+#: .\userpage\forms.py:72
+msgid "Familiya"
+msgstr "Фамилия"
+
+#: .\adminpage\forms.py:20 .\adminpage\forms.py:39
+#: .\adminpage\templates\adminpage\login.html:100
+msgid "Login"
+msgstr "имя пользователя"
+
+#: .\adminpage\forms.py:21 .\adminpage\forms.py:40
+#: .\adminpage\templates\adminpage\admin_userpage.html:22
+#: .\userpage\forms.py:47 .\userpage\forms.py:73
+msgid "Manzil"
+msgstr "Адрес"
+
+#: .\adminpage\forms.py:22 .\adminpage\forms.py:41 .\userpage\forms.py:48
+#: .\userpage\forms.py:74
+msgid "Telefon raqam"
+msgstr "Номер телефона"
+
+#: .\adminpage\forms.py:42
+msgid "Foydalanuvchini blocklash"
+msgstr "Заблокировать пользователя"
+
+#: .\adminpage\forms.py:59
+msgid "Xabar mavzusi"
+msgstr "Тема сообщения"
+
+#: .\adminpage\forms.py:60
+msgid "Xabar matni"
+msgstr "Текст сообщения"
+
+#: .\adminpage\templates\adminpage\account_edit.html:11
+msgid "Foydalanuvchi ma`lumotlarini tahrirlash"
+msgstr "Изменить данные пользователя"
+
+#: .\adminpage\templates\adminpage\account_edit.html:12
+msgid "Foydalanuvchi ma`lumotlarini yangilash yoki o`zgartirish kiritish"
+msgstr "Обновление или изменение информации о пользователе"
+
+#: .\adminpage\templates\adminpage\account_edit.html:19
+#: .\adminpage\templates\adminpage\admin_change_user_password.html:17
+#: .\userpage\templates\userpage\add_product.html:18
+#: .\userpage\templates\userpage\add_unit.html:18
+#: .\userpage\templates\userpage\client_edit.html:19
+#: .\userpage\templates\userpage\password_change.html:17
+#: .\userpage\templates\userpage\product_edit.html:20
+#: .\userpage\templates\userpage\to_sell_page.html:22
+msgid "Saqlash"
+msgstr "Сохранять"
+
+#: .\adminpage\templates\adminpage\admin_change_user_password.html:10
+#: .\templates\base.html:42
+#: .\userpage\templates\userpage\password_change.html:11
+msgid "Parolni o`zgartirish"
+msgstr "Изменить пароль"
+
+#: .\adminpage\templates\adminpage\admin_message.html:12
+msgid "Foydalanuvchilar uchun xabar qoldirish"
+msgstr "Оставьте сообщение для пользователей"
+
+#: .\adminpage\templates\adminpage\admin_message.html:13
+msgid "Ushbu xabar har bir foydalanuvchiga ko`rinadi"
+msgstr "Это сообщение видно каждому пользователю"
+
+#: .\adminpage\templates\adminpage\admin_userpage.html:20
+msgid "Tell"
+msgstr "Телефон"
+
+#: .\adminpage\templates\adminpage\admin_userpage.html:21
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: .\adminpage\templates\adminpage\admin_userpage.html:23
+msgid "Ro`yxatga olingan sana"
+msgstr "Дата регистрации"
+
+#: .\adminpage\templates\adminpage\login.html:93
+msgid "Shaxsiy sahifaga kirish"
+msgstr "Вход на личную страницу"
+
+#: .\adminpage\templates\adminpage\login.html:94
+msgid "Login va Parolingiz orqali o`z sahifangizga kirishingiz mumkin"
+msgstr "Вы можете войти на свою страницу, используя свой логин и пароль"
+
+#: .\adminpage\templates\adminpage\login.html:103
+msgid "Password"
+msgstr "Пароль"
+
+#: .\adminpage\templates\adminpage\registretions_users.html:10
+#: .\userpage\templates\userpage\add_client.html:10
+msgid "Yangi foydalanuvchi qo`shish"
+msgstr "Добавить нового клиента"
+
+#: .\adminpage\templates\adminpage\registretions_users.html:11
+msgid "Shartnoma tuzilgan foydalanuvchilarni ro`yxatga qo`shish"
+msgstr "Добавить пользователей, с которыми заключен договор, в список"
+
+#: .\adminpage\templates\adminpage\users_list.html:6
+msgid "Foydalanuvchilar ro`yxati"
+msgstr "Список пользователей"
+
+#: .\adminpage\templates\adminpage\users_list.html:11
+msgid "Barcha foydalanuvchilar ro`yxati "
+msgstr "Список всех пользователей"
+
+#: .\adminpage\templates\adminpage\users_list.html:12
+msgid "Foydalanuvchi qo`shish"
+msgstr "Добавить пользователя"
+
+#: .\adminpage\templates\adminpage\users_list.html:36
+msgid "Ko`proq foydalanuvchi ko`rish"
+msgstr "Посмотреть больше пользователей"
+
+#: .\adminpage\views.py:70
+msgid "Foydalanuvchi ro`yhatdan o`tdi"
+msgstr "Пользователь зарегистрирован"
+
+#: .\adminpage\views.py:73
+msgid "Foydalanuvchi ro`yxatdan o`tmadi"
+msgstr "Пользователь не зарегистрировался"
+
+#: .\adminpage\views.py:88 .\adminpage\views.py:92
+msgid "Tizimga xush kelibsiz!"
+msgstr "Добро пожаловать в систему!"
+
+#: .\adminpage\views.py:95
+msgid "Siz admin tomonidan blocklangansiz!"
+msgstr "Вы были заблокированы администратором!"
+
+#: .\adminpage\views.py:98
+msgid "Bundan login va parol mavjud emas!"
+msgstr "Логина и пароля нет!"
+
+#: .\adminpage\views.py:110 .\userpage\views.py:211
+msgid "Tahrirlash bajarildi"
+msgstr "Редактирование выполнено"
+
+#: .\adminpage\views.py:113 .\userpage\views.py:157 .\userpage\views.py:189
+#: .\userpage\views.py:214
+msgid "Xatolok yuz berdi"
+msgstr "Произошла ошибка"
+
+#: .\adminpage\views.py:139
+msgid "Parol o`zgartirildi"
+msgstr "Пароль был изменен"
+
+#: .\adminpage\views.py:142
+msgid "Iltimos boshqa parol kiriting"
+msgstr "Пожалуйста, введите другой пароль"
+
+#: .\adminpage\views.py:164
+msgid "Xabar yuborildi"
+msgstr "Сообщение было отправлено"
+
+#: .\adminpage\views.py:167
+msgid "Xabar yuborilmadi"
+msgstr "Сообщение не отправлено"
+
+#: .\adminpage\views.py:174
+msgid "Xabar o`chirildi!"
+msgstr "Сообщение удалено!"
+
+#: .\config\settings.py:167
+msgid "Russian"
+msgstr ""
+
+#: .\config\settings.py:168
+msgid "O`zbek"
+msgstr "Узбек"
+
+#: .\config\urls.py:25
+msgid "admin/"
+msgstr ""
+
+#: .\templates\base.html:29 .\templates\base.html:47
+msgid "Home"
+msgstr "Дом"
+
+#: .\templates\base.html:35
+msgid "Qo`shimchalar"
+msgstr "Дополнения"
+
+#: .\templates\base.html:39
+msgid "Telegram"
+msgstr "Телеграмма"
+
+#: .\templates\base.html:40 .\templates\base.html:93
+msgid "Mahsulot qo`shish"
+msgstr "Добавить продукт"
+
+#: .\templates\base.html:41 .\templates\base.html:77
+#: .\userpage\templates\userpage\to_sell_page.html:19
+msgid "Birlik qo`shish"
+msgstr "Добавить единицу"
+
+#: .\templates\base.html:44
+msgid "Chiqish"
+msgstr "Выход"
+
+#: .\templates\base.html:59
+msgid "Mijozlar ro`yxati"
+msgstr "Список клиентов"
+
+#: .\templates\base.html:64
+msgid "Birliklar"
+msgstr "Единицы"
+
+#: .\templates\base.html:84
+msgid "Mahsulotlar"
+msgstr "Продукты"
+
+#: .\templates\base.html:147
+msgid "Til"
+msgstr "Язык"
+
+#: .\templates\base.html:163 .\templates\base.html:164
+msgid "Qidirmoq"
+msgstr "Поиск"
+
+#: .\userpage\forms.py:16 .\userpage\forms.py:101 .\userpage\forms.py:125
+#: .\userpage\templates\userpage\add_product.html:11
+#: .\userpage\templates\userpage\add_unit.html:11
+msgid "O`lchov birligi"
+msgstr "Единица измерения"
+
+#: .\userpage\forms.py:30 .\userpage\forms.py:99 .\userpage\forms.py:123
+msgid "Mahsulot nomi"
+msgstr "Наименование товара"
+
+#: .\userpage\forms.py:49 .\userpage\forms.py:75
+msgid "Dokon nomi"
+msgstr "Название магазина"
+
+#: .\userpage\forms.py:50 .\userpage\forms.py:76
+msgid "Izoh qoldirish"
+msgstr "Оставить комментарий"
+
+#: .\userpage\forms.py:98 .\userpage\forms.py:122
+msgid "Mahsulot yetkazilgan sana"
+msgstr "Дата доставки продукта"
+
+#: .\userpage\forms.py:100 .\userpage\forms.py:124
+msgid "Mahsulot soni (miqdori)"
+msgstr "Номер продукта (количество)"
+
+#: .\userpage\forms.py:102 .\userpage\forms.py:126
+msgid "Mahsulot narxi (1 dona yoki 1 kg)"
+msgstr "Цена товара (1 шт. или 1 кг)"
+
+#: .\userpage\forms.py:103
+msgid "To`landi (uzs)"
+msgstr "Оплачено (сум)"
+
+#: .\userpage\forms.py:145
+msgid "Eski parol kiriting"
+msgstr "Введите старый пароль"
+
+#: .\userpage\forms.py:146
+msgid "Yangi parol kiriting"
+msgstr "Введите новый пароль"
+
+#: .\userpage\forms.py:147
+msgid "Yangi parolni qayta kiriting"
+msgstr "Повторно введите новый пароль"
+
+#: .\userpage\templates\userpage\add_client.html:11
+msgid "Yangi shartnoma tuzilgan foydalanuvchilarni ro`yxatga qo`shish"
+msgstr "Добавить пользователей с новым контрактом в список"
+
+#: .\userpage\templates\userpage\add_product.html:12
+#: .\userpage\templates\userpage\add_unit.html:12
+msgid "Mahsul turiga mos o`lchov birligi kiriting"
+msgstr "Введите соответствующую единицу измерения для типа продукта"
+
+#: .\userpage\templates\userpage\client_edit.html:11
+msgid "Mijoz ma`lumotlarini tahrirlash"
+msgstr "Изменить информацию о клиенте"
+
+#: .\userpage\templates\userpage\client_edit.html:12
+msgid "Mijozning ma`lumotlarini yangilash yoki o`zgartirish kiritish"
+msgstr "Обновление или изменение информации о клиенте"
+
+#: .\userpage\templates\userpage\clientpage.html:20
+msgid "Mijozning xarid ma`lumotlari"
+msgstr "Информация о покупке клиента"
+
+#: .\userpage\templates\userpage\clientpage.html:22
+msgid "Qarz miqdori"
+msgstr "Величина займа"
+
+#: .\userpage\templates\userpage\clientpage.html:22
+#: .\userpage\templates\userpage\payment.html:9
+#: .\userpage\templates\userpage\statistics.html:159
+#: .\userpage\templates\userpage\statistics.html:160
+msgid "so`m"
+msgstr "сум"
+
+#: .\userpage\templates\userpage\clientpage.html:34
+msgid "Barcha mahsulotlar"
+msgstr "Все продукты"
+
+#: .\userpage\templates\userpage\clientpage.html:35
+msgid "Qarzlarni to`lash"
+msgstr "Оплата долгов"
+
+#: .\userpage\templates\userpage\clientpage.html:39
+msgid "Yangi mahsulot"
+msgstr "Новый продукт"
+
+#: .\userpage\templates\userpage\clientpage.html:40
+msgid "Qarzdorlik ro`yxati"
+msgstr "Список долгов"
+
+#: .\userpage\templates\userpage\clientpage.html:55
+msgid "Boshlanish sanasi"
+msgstr "Дата начала"
+
+#: .\userpage\templates\userpage\clientpage.html:57
+msgid "Tugash sanasi"
+msgstr "Дата окончания"
+
+#: .\userpage\templates\userpage\clientpage.html:59
+msgid "Filtrlash"
+msgstr "Фильтрация"
+
+#: .\userpage\templates\userpage\clientpage.html:71
+#: .\userpage\templates\userpage\payment.html:15
+msgid "Mahsulot Nomi"
+msgstr "Наименование товара"
+
+#: .\userpage\templates\userpage\clientpage.html:72
+#: .\userpage\templates\userpage\payment.html:17
+msgid "Mahsulot narxi"
+msgstr "Цена продукта"
+
+#: .\userpage\templates\userpage\clientpage.html:73
+#: .\userpage\templates\userpage\payment.html:19
+msgid "Jami narx"
+msgstr "Итоговая цена"
+
+#: .\userpage\templates\userpage\clientpage.html:74
+#: .\userpage\templates\userpage\payment.html:20
+msgid "Qarizdorlik"
+msgstr "Задолженность"
+
+#: .\userpage\templates\userpage\clientpage.html:77
+msgid "Tahrirlash"
+msgstr "Редак.."
+
+#: .\userpage\templates\userpage\clientpage.html:78
+msgid "Ochirish"
+msgstr "Удалит"
+
+#: .\userpage\templates\userpage\clientpage.html:129
+#: .\userpage\templates\userpage\userpages.html:101
+msgid "Ko`proq mijozlarni ko`rish"
+msgstr "Увидеть больше клиентов"
+
+#: .\userpage\templates\userpage\payment.html:7
+msgid "Mijozning qarzlar ro`yxati"
+msgstr "Список долгов клиента"
+
+#: .\userpage\templates\userpage\payment.html:9
+msgid "Jami qarzdorlik"
+msgstr "Общая задолженность"
+
+#: .\userpage\templates\userpage\payment.html:16
+msgid "Yetkazib beringan sana"
+msgstr "Дата доставки"
+
+#: .\userpage\templates\userpage\payment.html:18
+msgid "Jami mahsulot"
+msgstr "Общий продукт"
+
+#: .\userpage\templates\userpage\payment.html:43
+msgid "To`lov Miqdori"
+msgstr "К оплате"
+
+#: .\userpage\templates\userpage\payment.html:44
+msgid "To`lov qilish"
+msgstr "Оплата"
+
+#: .\userpage\templates\userpage\product_edit.html:12
+msgid "Mahsulotni Tahrirlash"
+msgstr "Редактирование продукта"
+
+#: .\userpage\templates\userpage\product_edit.html:13
+msgid "Mahsulot parametrlarini o`zgartirish yoki qo`shimcha kiritish"
+msgstr "Изменение или добавление параметров товара"
+
+#: .\userpage\templates\userpage\statistics.html:110
+msgid "Mijozlar soni"
+msgstr "Количество клиентов"
+
+#: .\userpage\templates\userpage\statistics.html:124
+msgid "Mahsulot turlari"
+msgstr "Типы продуктов"
+
+#: .\userpage\templates\userpage\statistics.html:143
+msgid "Yanvar"
+msgstr "январь"
+
+#: .\userpage\templates\userpage\statistics.html:144
+msgid "Fevral"
+msgstr "февраль"
+
+#: .\userpage\templates\userpage\statistics.html:145
+msgid "Mart"
+msgstr "март"
+
+#: .\userpage\templates\userpage\statistics.html:146
+msgid "Aprel"
+msgstr "апрель"
+
+#: .\userpage\templates\userpage\statistics.html:147
+msgid "May"
+msgstr "Май"
+
+#: .\userpage\templates\userpage\statistics.html:148
+msgid "Iyun"
+msgstr "Июнь"
+
+#: .\userpage\templates\userpage\statistics.html:149
+msgid "Iyul"
+msgstr "Июль"
+
+#: .\userpage\templates\userpage\statistics.html:150
+msgid "Avgust"
+msgstr "Август"
+
+#: .\userpage\templates\userpage\statistics.html:151
+msgid "Sentyabr"
+msgstr "Сентябрь"
+
+#: .\userpage\templates\userpage\statistics.html:152
+msgid "Oktyabr"
+msgstr "Октябрь"
+
+#: .\userpage\templates\userpage\statistics.html:153
+msgid "Noyabr"
+msgstr "ноябрь"
+
+#: .\userpage\templates\userpage\statistics.html:154
+msgid "Dekabr"
+msgstr "Декабрь"
+
+#: .\userpage\templates\userpage\statistics.html:158
+msgid "oyidagi kirim chiqimlar"
+msgstr "ежемесячные доходы и расходы"
+
+#: .\userpage\templates\userpage\statistics.html:159
+msgid "Jami pul aylanmasi"
+msgstr "Общий денежный поток"
+
+#: .\userpage\templates\userpage\statistics.html:160
+msgid "Qarzlar"
+msgstr "Долги"
+
+#: .\userpage\templates\userpage\statistics.html:161
+msgid "Jami pulning qarzga nisbati"
+msgstr "Отношение общей суммы денег к долгу"
+
+#: .\userpage\templates\userpage\statistics.html:168
+msgid "yil qarz ko`rsatkichlari va mahsulotlar sotilish hajmi"
+msgstr "годовые показатели долга и объем реализации продукции"
+
+#: .\userpage\templates\userpage\success_password.html:8
+msgid "Parol muvoffaqiyatli o`zgartirildi"
+msgstr "Пароль успешно изменен"
+
+#: .\userpage\templates\userpage\success_password.html:9
+msgid "Yangi parol orqali saytga kirishingiz mumkin"
+msgstr "Вы можете войти на сайт с новым паролем"
+
+#: .\userpage\templates\userpage\success_password.html:11
+msgid "Kirish"
+msgstr "Входить"
+
+#: .\userpage\templates\userpage\to_sell_page.html:10
+msgid "Mahsulot sotish"
+msgstr "Продажи продуктов"
+
+#: .\userpage\templates\userpage\userpages.html:34
+msgid "Barcha mijozlar ro`yxati "
+msgstr "Список всех клиентов"
+
+#: .\userpage\templates\userpage\userpages.html:35
+msgid "Mijoz qo`shish"
+msgstr "Добавить клиента"
+
+#: .\userpage\views.py:122
+msgid "Ro`yxatga yangi klient qo`shildi"
+msgstr "В список добавлен новый клиент"
+
+#: .\userpage\views.py:125
+msgid "Ro`yxatga yangi klient qo`shilmadi"
+msgstr "Ни один новый клиент не был добавлен в список"
+
+#: .\userpage\views.py:145
+msgid "Ushbu birlik avvalroq qo`shilgan"
+msgstr "Этот блок был добавлен ранее"
+
+#: .\userpage\views.py:154
+msgid "Yangi birlik yaratildi!"
+msgstr "Создан новый блок!"
+
+#: .\userpage\views.py:160 .\userpage\views.py:192
+msgid "Birlik nomi kiritilmadi"
+msgstr "Не введено название объекта"
+
+#: .\userpage\views.py:177
+msgid "Ushbu mahsulot ro`yxatda mavjud"
+msgstr "Этот продукт указан"
+
+#: .\userpage\views.py:186
+msgid "Mahsulot ro`yxatga qo`shildi"
+msgstr "Товар добавлен в список"
+
+#: .\userpage\views.py:277 .\userpage\views.py:384
+msgid "To`lov summasi noto`g`ri kiritildi"
+msgstr "Сумма платежа введена неверно"
+
+#: .\userpage\views.py:289
+msgid "Clientga mahsulot qo`shildi"
+msgstr "Товар добавлен в клиент"
+
+#: .\userpage\views.py:292
+msgid "Clientga mahsulot qo`shilmadi"
+msgstr "Товар не был добавлен в клиент"
+
+#: .\userpage\views.py:324
+msgid "Iltimos! To`lov miqdorini qayta tekshiring"
+msgstr "Пожалуйста! Проверьте сумму платежа еще раз"
+
+#: .\userpage\views.py:341
+msgid "Noto`g`ri so`rov yuborildi"
+msgstr "Был отправлен неверный запрос"
+
+#: .\userpage\views.py:348 .\userpage\views.py:363
+msgid "Mahsulot o`chirildi!"
+msgstr "Товар удален!"
+
+#: .\userpage\views.py:356
+msgid "Birlik o`chirildi!"
+msgstr "Единица измерения удалена!"
+
+#: .\userpage\views.py:396
+msgid "Mahsulot tahrirlandi"
+msgstr "Товар был отредактирован"
+
+#: .\userpage\views.py:399
+msgid "Xatolik yuz berdi"
+msgstr "Произошла ошибка"

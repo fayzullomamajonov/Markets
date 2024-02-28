@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %} 
+<style>
+  .client-actions {
+    display: none;
+  }
+</style>
+<link rel="stylesheet" href="{% static 'styles/userpage.css' %}" /> 
+
+
+<div class="container-fluid">
+        <div
+          class="single-layout1__center sticky-content pr-20"
+          style="
+            position: relative;
+            overflow: visible;
+            box-sizing: border-box;
+            min-height: 1px;
+          "
+        >
+          <div
+            class="theiaStickySidebar"
+            style="
+              padding-top: 0px;
+              padding-bottom: 1px;
+              position: static;
+              transform: none;
+            "
+          >
+            <div class="navx-ui">
+              <a class="navx-ui__item active" href="#">{% trans "Barcha mijozlar ro`yxati " %}</a>
+              <a class="navx-ui__item active" href="{% url 'add_client' %}">{% trans "Mijoz qo`shish" %}</a>
+            </div>
+            <div class="daily-news max-w" id="news-list">
+              {% for client in list_clint %}
+              <div class="daily-block l-item" data-client-id="{{ client.pk }}">
+                <p class="news-date">{{client.date|date:"d.m.Y"}}</p>
+                <div class="right-block text-center list-group list-group-horizontal-xxl">
+                  <ul class="list-group list-group-horizontal-xxl client-info">
+                    <a class="client-link" href="{% url 'clientpage' client.pk %}">
+                      <li class="news-text list-group-item"><b>{{ client.name }} {{ client.surename }}</b></li>
+                      <li class="news-text list-group-item">{{ client.tell }}</li>
+                      <li class="news-text list-group-item">{{ client.address }}</li>
+                      {% if client.descriptions %}
+                        <li class="news-text list-group-item"><i style="color:grey;">{{ client.descriptions }}</i></li>
+                      {% endif %}
+                    </a>
+                    <div class="client-actions" style="display: none;">
+                      <li style="padding:0px;" class="news-text list-group-item d-grid gap-2 d-md-flex justify-content-md-center">
+                        <a class="btn btn-danger action-button" href="{% url 'client_delete' client.pk %}">delete</a>
+                      </li>
+                      <li style="padding:0px;" class="news-text list-group-item d-grid gap-2 d-md-flex justify-content-md-center">
+                        <a class="btn btn-warning action-button" href="{% url 'client_edit' client.pk %}">edit</a>
+                      </li>
+                    </div>
+                  </ul>
+                </div>
+              </div>
+            {% endfor %}
+            
+            <script>
+              document.addEventListener('DOMContentLoaded', function() {
+                const clientInfoElements = document.querySelectorAll('.client-info');
+              
+                clientInfoElements.forEach(function(clientInfo) {
+                  let clickCount = 0;
+              
+                  clientInfo.addEventListener('click', function(event) {
+                    if (event.target.classList.contains('action-button')) {
+                      return;
+                    }
+              
+                    event.preventDefault();
+                    clickCount++;
+              
+                    if (clickCount === 2) {
+                      const clientActions = clientInfo.querySelector('.client-actions');
+                      clientActions.style.display = clientActions.style.display === 'none' ? 'block' : 'none';
+                      clickCount = 0;
+                    } else {
+                      setTimeout(function() {
+                        if (clickCount === 1) {
+                          const clientLink = clientInfo.querySelector('.client-link');
+                          window.location.href = clientLink.href;
+                        }
+                        clickCount = 0;
+                      }, 300);
+                    }
+                  });
+                });
+              });
+              
+            </script>
+            
+              {% if list_clint.has_next %}
+              <!-- <div class="breaking-link-wrapper audio-item audio-more"> -->
+              <button class="load-more load-more__link" style="padding:1em;" id="load-more"
+                  data-next-page="{{ list_clint.next_page_number }}">{% trans "Ko`proq mijozlarni ko`rish" %}</button>
+              <!-- </div> -->
+              {% endif %}
+            </div>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+              $(document).ready(function () {
+                $("#load-more").click(function () {
+                  const nextPage = $(this).data("next-page");
+                  $.get("?page=" + nextPage, function (data) {
+                    const newAudios = $(data).find(".l-item");
+                    $(".l-item:last").after(newAudios);
+
+                    const newButton = $(data).find("#load-more");
+                    if (newButton.length) {
+                      $("#load-more").data(
+                        "next-page",
+                        newButton.data("next-page")
+                      );
+                    } else {
+                      $("#load-more").remove();
+                    }
+                  });
+                });
+              });
+            </script>
+    
+          </div>
+        </div>
+        <div
+          class="single-layout__right sticky-block"
+          style="
+            position: relative;
+            overflow: visible;
+            box-sizing: border-box;
+            min-height: 1px;
+          "
+        >
+          <div
+            class="theiaStickySidebar"
+            style="
+              padding-top: 1px;
+              padding-bottom: 1px;
+              position: static;
+              transform: none;
+            "
+          >
+          </div>
+      </div>
+    </div>
+
+{% endblock content %}

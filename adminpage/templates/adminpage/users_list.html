@@ -1,0 +1,69 @@
+{% extends 'base.html' %} {% load i18n %} {% load static %} {% block content %}
+
+<link rel="stylesheet" href="{% static 'styles/user_list.css' %}" />
+
+<div class="container-fluid">
+ <i> <h4 style="text-align: center"><b>{% trans "Foydalanuvchilar ro`yxati" %}</b></h4></i>
+
+  <div class="single-layout1__center sticky-content pr-20" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
+    <div class=" theiaStickySidebar" style=" padding-top: 0px; padding-bottom: 1px;  position: static; transform: none;">
+      <div  class="navx-ui">
+        <a class="navx-ui__item active" href="#">{% trans "Barcha foydalanuvchilar ro`yxati " %}</a>
+        <a class="navx-ui__item" href="{% url 'registrations' %}">{% trans "Foydalanuvchi qo`shish" %}</a>
+      </div>
+      <div class="daily-news max-w" id="news-list">
+        {% for user1 in user_list %} {% if not user1.is_superuser %}
+        <a class="daily-block l-item" href="{% url 'admin_userpage' user1.pk %}">
+          <p class="news-date">{{user1.date|date:"d.m.Y"}}</p>
+          <div  class="right-block list-group list-group-horizontal-xxl text-center">
+            <ul class="list-group list-group-horizontal-xxl">
+              <li class="news-title list-group-item"><b class="usertitle">{{user1.first_name}} {{user1.last_name}}</b></li>
+              {% if user1.address %}
+              <li class="news-text list-group-item" >{{ user1.address|safe }}</li>
+              {% endif %}
+              <li class="news-text list-group-item" >{{ user1.tell }}</li>
+              {% if user1.is_blocked %}
+                <li style="background-color: hsl(0, 100%, 50%);" class="news-text list-group-item" >blocked</li>
+              {% else %}
+                <li style="background-color: #78ff78;" class="news-text list-group-item" >not blocked</li>
+              {% endif %}
+              
+          </ul>
+          </div>
+        </a>
+        {% endif %} {% endfor %} {% if user_list.has_next %}
+        <button class="load-more load-more__link" style="padding: 1em" id="load-more" data-next-page="{{ user_list.next_page_number }}" >
+          {% trans "Ko`proq foydalanuvchi ko`rish" %}
+        </button>
+        {% endif %}
+      </div>
+
+     
+
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+        $(document).ready(function () {
+          $("#load-more").click(function () {
+            const nextPage = $(this).data("next-page");
+            $.get("?page=" + nextPage, function (data) {
+              const newAudios = $(data).find(".l-item");
+              $(".l-item:last").after(newAudios);
+
+              const newButton = $(data).find("#load-more");
+              if (newButton.length) {
+                $("#load-more").data("next-page", newButton.data("next-page"));
+              } else {
+                $("#load-more").remove();
+              }
+            });
+          });
+        });
+      </script>
+    </div>
+  </div>
+  <div class="single-layout__right sticky-block" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px; ">
+    <div class="theiaStickySidebar" style="padding-top: 1px; padding-bottom: 1px;position: static;transform: none;"></div>
+  </div>
+</div>
+
+{% endblock content %}

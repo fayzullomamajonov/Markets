@@ -1,0 +1,267 @@
+{% load static %}
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{LANGUAGE_CODE}}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'styles/message.css' %}" />
+    
+    <link rel="stylesheet" href="{% static 'styles/statistics.css' %}"/>
+    <link rel="stylesheet" href="{% static 'styles/base.css' %}" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    
+    <title>Document</title>
+  </head>
+  <body class="container-fluid" style="margin-bottom: 85px;">
+    <div class="container">
+      {% if request.user.is_authenticated %}
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          {% if request.user.is_superuser  %}
+          <a class="navbar-brand" href="{% url 'users_list' %}">{% trans "Home" %}</a>
+          {% else %}
+         <div style="display: flex;">
+          <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><img style="width: 35px; height:30px" src="{% static 'images/items.png' %}" alt=""></button>
+          <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"><a class="navbar-brand" href="{% url 'statistics' user.pk %}">{% trans 'Qo`shimchalar' %}</a></h5>
+              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <a style="color:black;"  class="nav-link active" href="https://t.me/Mr_MaEstRo_9117"><img id="imgTg" style="width: 25px; height:25px;  margin-right: 5px;" src="{% static 'images/telegram.jpg' %}" alt="">{% trans 'Telegram' %}</a>
+                <a class="dropdown-item" href="{% url 'add_product' %}"><img style="width: 25px; height:25px; margin-right: 5px;" src="{% static 'images/add_product.png' %}" alt="">{% trans 'Mahsulot qo`shish' %}</a>
+                <a class="dropdown-item" href="{% url 'add_unit' %}"><img style="width: 25px; height:25px; margin-right: 5px;padding:0px;" src="{% static 'images/unit.png' %}" alt="">{% trans 'Birlik qo`shish' %}</a>
+                <a class="dropdown-item" href="{% url 'change_password' %}"><img style="width: 25px; height:25px; margin-right: 5px;" src="{% static 'images/password.png' %}" alt="">{% trans "Parolni o`zgartirish" %}</a>
+                <hr>
+                <a class="dropdown-item" href="{% url 'login' %}"><img style="width: 25px; height:25px; margin-right: 5px;" src="{% static 'images/exit.png' %}" alt="">{% trans "Chiqish" %}</a>
+            </div>
+          </div>
+          <a class="navbar-brand" href="{% url 'statistics' user.pk %}">{% trans "Home" %}</a>
+         </div>
+          
+          {% endif %}
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              {% if not request.user.is_superuser %}
+              <li class="nav-item">
+                <a class="nav-link active" href="{% url 'userpages' user.pk %}">{% trans "Mijozlar ro`yxati" %}</a>
+              </li>
+              <li class="nav-item">
+                <div class="btn-group">
+                  <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    {% trans "Birliklar" %}
+                  </button>
+                  <ul class="dropdown-menu">
+                    {% for unit in units %}
+                    {% if unit.user_id == request.user.id or unit.user_id == none %}
+                    <li class="dropdown-item">{{ unit }}
+                      {% if unit.user_id != none %}
+                      <a style="float:right;" href="{% url 'unit_delete' unit.pk %}"><img style="width:20px; height:20px" src="{% static 'images/delete.png' %}" alt=""></a>
+                      {% endif %}
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                    <hr>
+                    <li><a class="dropdown-item" href="{% url 'add_unit' %}">{% trans 'Birlik qo`shish' %}</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div class="btn-group">
+                  <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    {% trans "Mahsulotlar" %}
+                  </button>
+                  <ul class="dropdown-menu">
+                    {% for product in products %}
+                    {% if product.user_id == request.user.id %}
+                    <li class="dropdown-item">{{ product }}<a href="{% url 'products_delete' product.pk %}"><img style="float:right; width:20px; height:20px" src="{% static 'images/delete.png' %}" alt=""></a></li>
+                    {% endif %}
+                    {% endfor %}
+                    <hr>
+                    <li><a class="dropdown-item" href="{% url 'add_product' %}">{% trans 'Mahsulot qo`shish' %}</a></li>
+                  </ul>
+                </div>
+              </li>
+              {% endif %}
+              {% if not request.user.is_superuser %}
+              {% if admin_messages %}
+              <li class="nav-item">
+                <div class="btn-group">
+                  <button style="display:inline-flex;border-radius:15px; " type="button" class="btn dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div style="display: flex;">
+                      <img style="width: 30px; height:26px;margin:0px;" src="{% static 'images/message.png' %}" alt="">
+                    {% if admin_messages %}
+                      <sup style="width:20px; height:20px; background-color:red; border-radius:20px; margin-left:-16px;padding:6px;">{{admin_messages.count}}</sup>
+                    {% endif %}
+                    </div>
+                  </button>
+                  <ul class="dropdown-menu">
+                    {% for m in admin_messages %}
+                    <div style="display: inline-flex;">
+                      <a class="nav-link active" href="{% url 'message_page' m.pk %}"><li class="dropdown-item">{{ m.message_title }}<img style="width:25px; height:27px;" src="{% static 'images/message_icon.png' %}" alt=""></li></a>
+                    </div>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </li>
+              {% endif %}
+              {% else %}
+              <li class="nav-item">
+                <div class="btn-group">
+                  <button style="display:inline-flex;" type="button" class="btn dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div style="display: flex;">
+                      <img style="width: 30px; height:26px;" src="{% static 'images/message.png' %}" alt="">
+                    {% if admin_messages %}
+                      <sup style="width:20px; height:20px; background-color:red; border-radius:20px; margin-left:-16px;padding:6px;">{{admin_messages.count}}</sup>
+                    {% endif %}
+                    </div>
+                  </button>
+                  <ul class="dropdown-menu">
+                    {% for m in admin_messages %}
+                    <div style="display: inline-flex;">
+                      <a class="nav-link active" href="{% url 'message_page' m.pk %}"><li class="dropdown-item">{{ m.message_title }}</li></a>
+                      <a href="{% url 'delete_message' m.pk %}"><img style="width:20px; float:right; height:25px;padding:0px;margin-top:10px;" src="{% static 'images/delete.png' %}" alt=""></a>
+                    </div>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item"> <a class="nav-link active" href="{% url 'admin_message' %}"><img style="width:30px; height:28px;" src="{% static 'images/add_message.png' %}" alt=""></a></li>
+              <li class="nav-item"><a class="nav-link active" href="{% url 'login' %}"><img class="exit-img" id="imgTg" style="width: 30px; height:26px;" src="{% static 'images/exit.png' %}" alt=""></a></li>
+              {% endif %}
+              <li class="btn-group dropend">
+                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img style="height: 20; width:20px;" src="{% static 'images/languages.png' %}" alt="">
+                  {% trans "Til" %}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  {% get_current_language as LANGUAGE_CODE %}
+                  {% get_available_languages as LANGUAGES %}
+                  {% get_language_info_list for LANGUAGES as languages %}
+                  
+                  {% for lang in languages %}
+                    <li><a class="dropdown-item" href="/{{lang.code}}/{{request.get_full_path|slice:'4:'}}">
+                      {{lang.name_local }}
+                  </a></li>
+                  {% endfor %}
+                </ul>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <input class="form-control me-2" type="text" name="search" id="search-input" onkeyup="myFunction()" placeholder={% trans 'Qidirmoq' %} aria-label="Search"/>
+              <button class="btn btn-outline-success"  type="submit">{% trans "Qidirmoq" %}</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      {% endif %}
+      <!-- <script>
+        function myFunction() {
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("search-input");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("myTable");
+          tr = table.getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            }
+          }
+        }
+      </script>
+      <script>
+        document.getElementById('search-input').addEventListener('input', function(event) {
+          const searchValue = event.target.value.toLowerCase();
+          const clients = document.querySelectorAll('.daily-block');
+        
+          clients.forEach(function(client) {
+            const clientName = client.querySelector('.news-text').textContent.toLowerCase();
+            if (clientName.includes(searchValue)){
+              client.style.display = 'daily-block';
+            } else {
+              client.style.display = 'none';
+            }
+          });
+          
+        });
+        </script>
+        <script>
+          document.getElementById('search-input').addEventListener('input', function(event) {
+            const searchValue = event.target.value.toLowerCase();
+            const clients = document.querySelectorAll('.daily-block');
+          
+            clients.forEach(function(client) {
+              const clientName = client.querySelector('.news-title').textContent.toLowerCase();
+              if (clientName.includes(searchValue)){
+                client.style.display = 'daily-block';
+              } else {
+                client.style.display = 'none';
+              }
+            });
+            
+          });
+          </script> -->
+
+          {% if messages %}
+          <center>
+            {% for message in messages %}
+              <div class="alert alert--{{message.tags}}" id="alert-message">
+                <p class="alert__message">
+                  {{message}} <button class="alert__close">⨯</button>
+                </p>
+              </div>
+            {% endfor %}
+          </center>
+          <script>
+            function hideAlertMessage() {
+              var alertMessage = document.getElementById('alert-message');
+              if (alertMessage) {
+                alertMessage.style.display = 'none';
+              }
+            }
+        
+            setTimeout(hideAlertMessage, 3000); // 3 sekunddan so'ng xabarni yashirish
+          </script>
+        {% endif %}
+        
+
+      <div>
+        {% block content %} 
+        
+        {% endblock content %}</div>
+    </div>
+    <!-- <script src="{% static 'uikit/app.js' %}"></script> -->
+    <script src="{% static 'js/app.js' %}"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"
+    ></script>
+
+    
+
+  </body>
+</html>

@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% load static %} {% load i18n %} {% load crispy_forms_tags %} 
+{%block content %}
+
+<link rel="stylesheet" href="{% static 'styles/add_client.css' %}" /> 
+  <div class="container-fluid">
+      <div class="card-page">
+        <div class="head-card">
+          <img class="img-icon" src="{% static 'images/icon.png' %}" alt="icon">
+          <div class="text-center">
+            <h3 class="card-title">{% trans "Yangi foydalanuvchi qo`shish" %}</h3>
+          <p class="card-description">{% trans "Yangi shartnoma tuzilgan foydalanuvchilarni ro`yxatga qo`shish" %}</p>
+          </div>
+        </div>
+      <form class="form-class" action="{% url 'add_client' %}" method="POST">
+        {% csrf_token %}
+            {{form|crispy}}
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <input class="btn btn-primary stretched-link"  type="submit" value="Saqlash" />
+        </div>
+      </form>
+    </div>
+  </div>
+  
+{% endblock %}

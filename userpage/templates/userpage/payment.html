@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load humanize %}
+{% block content %}
+<div class="container">
+    <h1 class="text-center" >{% trans "Mijozning qarzlar ro`yxati" %}</h1>
+    <div style="display: flex;" >
+        <h3 class="text-center" style="margin: 15px;" >{% trans 'Jami qarzdorlik' %}: {{ total_debt|floatformat:"-1"|intcomma  }} {% trans 'so`m' %}</h3>
+    </div>
+    <div class="table-responsive">
+        <table id="myTable" class="table">
+            <thead>
+            <tr>
+                <th class="text-center" style="border: 1.5px solid black;" scope="col" >{% trans "Mahsulot Nomi" %}</th> 
+                <th class="text-center" style="border: 1.5px solid black;" scope="col">{% trans 'Yetkazib beringan sana' %}</th>
+                <th class="text-center" style="border: 1.5px solid black;" scope="col">{% trans 'Mahsulot narxi' %}</th>
+                <th class="text-center" style="border: 1.5px solid black;" scope="col">{% trans "Jami mahsulot" %}</th>
+                <th class="text-center" style="border: 1.5px solid black;" scope="col">{% trans 'Jami narx' %}</th>
+                <th class="text-center" style="border: 1.5px solid black;" scope="col">{% trans 'Qarizdorlik' %}</th>
+            </tr>
+            </thead>
+            {% for trade in trade_list %}
+            {% if trade.debt > 0 %}
+        <tbody >
+            <tr>
+                <td class="text-center" style="border: 1px solid black;">{{ trade.product_name }}</td>
+                <td class="text-center" style="border: 1px solid black;" > {{ trade.date|date:"d.m.Y" }}</td>
+                <td class="text-center" style="border: 1px solid black;">{{ trade.price|floatformat:"-1"|intcomma  }}</td>
+                <td class="text-center" style="border: 1px solid black;">{{ trade.quantity_product|floatformat:"-1"|intcomma  }} {{ trade.unit }}</td>
+                <td class="text-center" style="border: 1px solid black;">{{ trade.sum_price|floatformat:"-1"|intcomma  }}</td>
+                <td class="text-center" style="border: 1px solid black;">{{ trade.debt|floatformat:"-1"|intcomma  }}</td>
+            </tr>
+        </tbody>
+        {% endif %}
+    
+        {% endfor %}
+        </table>
+    </div>
+    <form method="post" action="{% url 'peyment_amount' client.pk %}">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <input type="number" name="payment_amount" id="payment_amount" step="0.01" min="0" required class="form-control" placeholder="{% trans 'To`lov Miqdori' %}" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button class="btn btn-outline-success" type="submit" id="button-addon2">{% trans 'To`lov qilish' %}</button>
+          </div>
+    </form>
+
+</div>
+{% endblock content %}

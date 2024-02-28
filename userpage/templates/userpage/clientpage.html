@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load humanize %}
+{% load crispy_forms_tags %} 
+{% block content %}
+<style>
+  .product-actions {
+    display: none;
+  }
+
+  .block-product:hover .product-actions {
+    display: block;
+  }
+</style>
+
+<link rel="stylesheet" href="{% static 'styles/userpage.css' %}" /> 
+
+<div class="container-fluid">
+    <i><h4 style="margin-bottom: 24px;" class="nav justify-content-center text-center">{% trans "Mijozning xarid ma`lumotlari" %}</h4></i>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <i><h5 class="text-center" >{% trans "Qarz miqdori" %}: {{ total_debt|floatformat:"-1"|intcomma }} {% trans 'so`m' %}</h5></i>
+    </div>
+
+
+
+<hr>
+<link rel="stylesheet" href="{% static 'styles/userpage.css' %}" /> 
+<div class="container-fluid">
+    <div class="single-layout1__center sticky-content pr-20" style=" position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
+      <div class="theiaStickySidebar" style="padding-top: 0px; padding-bottom: 1px; position: static; transform: none; ">
+      <div class="table-responsive">
+        <div class="navx-ui table">
+          <a class="navx-ui__item active" href="#">{% trans "Barcha mahsulotlar" %}</a>
+          <a class="navx-ui__item active" href="{% url 'payment' client.pk %}">{% trans "Qarzlarni to`lash" %}</a>
+        </div>
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <a class="btn btn-primary me-md-2 " href="{% url 'to_sell_page' client.pk %}">{% trans "Yangi mahsulot" %}</a>
+          <button  id="showDebts" class="btn btn-danger ">{% trans "Qarzdorlik ro`yxati" %}</button>
+      </div>
+      <div style="margin-top:20px;" class="input-group d-grid gap-2 d-md-flex justify-content-md-end">
+      {% block comment %}
+      <form method="GET" action="{% url 'clientpage' client.pk  %}">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        {{form|crispy}}
+        <!-- <button  class="btn btn-info" type="submit">Filtrlash</button> -->
+        </div>
+        
+    </form>
+      {% endblock %}
+
+      <form method="GET" action="{% url 'clientpage' client.pk  %}">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <label for="start_date">{% trans 'Boshlanish sanasi' %}:</label>
+            <input type="date" id="start_date" name="start_date" value="{{ start_date|date:'Y-m-d' }}">
+            <label for="end_date">{% trans 'Tugash sanasi' %}:</label>
+            <input type="date" id="end_date" name="end_date"  value="{{ end_date|date:'Y-m-d' }}">
+            <button class="btn btn-info" type="submit">{% trans 'Filtrlash' %}</button>
+        </div>
+    </form>
+
+      </div>
+        <div class="daily-news max" id="news-list">
+          {% for trad in trade_list %}
+          <div class="block-product" data-product-id="{{ trad.id }}">
+            <div class="daily-block l-item">
+              <p class="news-date news-text">{{trad.date|date:"d.m.Y"}}</p>
+              <div class="right-block text list-group list-group-horizontal-xxl">
+                <ul class="list-group list-group-horizontal-xxl">
+                  <li class="list-group-item news-text"><b style="margin-right: 10px;">{% trans "Mahsulot Nomi" %}:</b>{{ trad.product_name }}</li>
+                  <li class="list-group-item news-text"><b style="margin-right: 10px;">{% trans 'Mahsulot narxi' %}:</b>{{ trad.price|floatformat:"-1"|intcomma }}</li>
+                  <li class="list-group-item news-text"><b style="margin-right: 10px;">{% trans 'Jami narx' %}:</b> {{ trad.sum_price|floatformat:"-1"|intcomma }}</li>
+                  <li class="list-group-item news-text"><b style="margin-right: 10px;">{% trans 'Qarizdorlik' %}:</b>{{ trad.debt|floatformat:"-1"|intcomma }}</li>
+                </ul>
+                <div class="product-actions">
+                  <a href="{% url 'product_edit' trad.id %}" class="btn btn-primary">{% trans 'Tahrirlash' %}</a>
+                  <a href="{% url 'product_delete' trad.id %}" class="btn btn-danger">{% trans "Ochirish" %}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+        
+        <script>
+          document.querySelectorAll('.block-product').forEach(function (product) {
+            product.addEventListener('click', function (event) {
+              event.stopPropagation();
+              var actions = product.querySelector('.product-actions');
+              actions.style.display = actions.style.display === 'block' ? 'none' : 'block';
+            });
+          });
+        </script>
+
+        
+        
+          <script>
+            document.getElementById("showDebts").addEventListener("click", function () {
+              const tradeItems = document.querySelectorAll(".block-product");
+              const showDebtsButton = document.getElementById("showDebts");
+          
+              if (showDebtsButton.getAttribute("data-showing-debts") === "true") {
+                tradeItems.forEach(function (item) {
+                  item.style.display = "block";
+                });
+                showDebtsButton.setAttribute("data-showing-debts", "false");
+              } else {
+                tradeItems.forEach(function (item) {
+                  const debtElement = item.querySelector(".news-text:last-child");
+                  const debtValue = parseFloat(
+                    debtElement.textContent.replace(/[^0-9.]/g, "")
+                  );
+                  if (debtValue > 0) {
+                    item.style.display = "block";
+                  } else {
+                    item.style.display = "none";
+                  }
+                });
+                showDebtsButton.setAttribute("data-showing-debts", "true");
+              }
+            });
+          </script>
+
+
+            
+          {% if trade_list.has_next %}
+          <!-- <div class="breaking-link-wrapper audio-item audio-more"> -->
+          <button class="load-more load-more__link" style="padding:1em;" id="load-more"
+              data-next-page="{{ trade_list.next_page_number }}">{% trans "Ko`proq mijozlarni ko`rish" %}</button>
+          <!-- </div> -->
+          {% endif %}
+        </div>
+
+
+        
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+          $(document).ready(function () {
+            $("#load-more").click(function () {
+              const nextPage = $(this).data("next-page");
+              $.get("?page=" + nextPage, function (data) {
+                const newAudios = $(data).find(".l-item");
+                $(".l-item:last").after(newAudios);
+
+                const newButton = $(data).find("#load-more");
+                if (newButton.length) {
+                  $("#load-more").data(
+                    "next-page",
+                    newButton.data("next-page")
+                  );
+                } else {
+                  $("#load-more").remove();
+                }
+              });
+            });
+          });
+        </script>
+
+        
+
+          
+    
+      </div>
+    </div>
+    
+    <div class="single-layout__right sticky-block" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px; ">
+      <div class="theiaStickySidebar" style="padding-top: 1px; padding-bottom: 1px; position: static; transform: none; ">
+      </div>
+  </div>
+</div>
+</div>
+{% endblock content %}

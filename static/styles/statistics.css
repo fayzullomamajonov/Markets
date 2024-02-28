@@ -1,0 +1,76 @@
+.diagramma-title{
+    text-align: center;
+    block-size: auto;
+}
+
+.diagramma{
+    display: flex;
+    width: 800px;
+    height: 400px;
+    overflow-x: auto;
+}
+
+@media only screen and (max-width: 500px) {
+    #debtChart{
+        overflow-x: auto;
+        width: 100%;
+    }
+  }
+
+  .alert {
+    text-align: center;
+    padding: 15px;
+    margin-top: 12px;
+    margin-bottom: 20px;
+    width: 300px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+} 
+
+.alert__message {
+    margin: 0;
+    font-weight: bold;
+    display: flex;
+  }
+
+.alert--success {
+    background-color: rgba(76, 175, 80, 0.1); 
+    border-color: #4caf50;
+    color: #4caf50;
+}
+
+.alert--error {
+  background-color: rgba(224, 9, 9, 0.395); 
+  border-color: #c47878;
+  color: #be2323;
+}
+.alert__close {
+background: none;
+border: none;
+cursor: pointer;
+font-size: 1.5rem;
+float: right;
+margin-top: -7px;
+margin-right: -7px;
+
+} 
+
+.alert {
+text-align: center;
+padding: 15px;
+margin-top: 12px;
+margin-bottom: 20px;
+width: 300px;
+border: 1px solid transparent;
+border-radius: 4px;
+} 
+
+
+#active2{
+  background-color: rgba(76, 175, 80, 0.1); 
+  border-color: #4caf50;
+}
+.scrollable-list {
+  max-height: calc(1.5em * 5 + 2px * 5);
+  overflow-y: auto;
+}

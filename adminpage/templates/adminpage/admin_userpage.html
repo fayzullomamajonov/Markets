@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+  .btn:hover{
+    box-shadow: 3px 3px 3px 3px #5893eb;
+  }
+
+</style>
+
+{% if not user_page.is_superuser %}
+<div class="text-center card">
+    <div style="border: 0.5px solid" class="card-header ">
+      <b>{{user_page.last_name|upper}} {{user_page.first_name|upper}}</b>
+    </div>
+  <img style="max-height:200px;" class="card-img" src="{% static 'images/card_backgraund.png' %}" alt="">
+    <div style="margin-top:30px;" class="card-img-overlay">
+      <p class="card-title"><b>{% trans 'Tell' %}:</b> {{ user_page.tell }}</p>
+      <p class="card-title"><b>{% trans 'Username' %}:</b> {{ user_page.username }}</p>
+      <p class="card-text"><b>{% trans 'Manzil'%}:</b> {{ user_page.address }}</p>
+      <p class="card-text"><b>{% trans 'Ro`yxatga olingan sana' %}:</b> <small>{{ user_page.date|date:"Y.m.d" }}</small></p>
+      <div class="justify-content-md-end" style="display:flex;">
+        <a href="{% url 'account_edit' user_page.pk %}" class="btn"><img style="width:25px; height:25px;" src="{% static 'images/edit.png' %}" alt=""></a>
+        <a href="{% url 'account_delete' user_page.pk %}" class="btn"><img style="width:28px; height:30px;" src="{% static 'images/delete.png' %}" alt=""></a>
+        <a href="{% url 'admin_change_user_password' user_page.pk %}" class="btn"><img style="width:28px; height:30px;" src="{% static 'images/password.png' %}" alt=""></a>
+        </div>
+    </div>
+
+  </div>
+{% endif %}
+{% endblock %}

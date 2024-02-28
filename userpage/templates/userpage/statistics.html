@@ -1,0 +1,284 @@
+{% extends 'base.html' %} {% load static %} {% load i18n %} {% load crispy_forms_tags %} {% load humanize %}
+
+{%block content %}
+
+
+<link rel="stylesheet" href="{% static 'styles/statistics.css' %}"/>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+
+  .scrollable-list {
+    max-height: calc(1.5em * 10 + 2px * 10);
+    overflow-y: auto;
+  }
+  #card-text1 a {
+    display: inline-block;
+    padding: 10px;
+    background-color: #e3f2fd;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 15px;
+    }
+    #card-text2 a{
+      display: inline-block;
+      padding: 10px;
+      background-color: #e3f2fd;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 15px;
+    }
+
+    #card-text1, #card-text2{
+      text-align: right;
+    }
+    
+  #card-text1 a:hover{
+      box-shadow: 0 5px 3px 3px #e3f2fd;
+  }
+
+  #card-text2 a:hover{
+    box-shadow: 0 5px 3px 3px #e3f2fd;
+}
+hr{
+  box-shadow: 0 2px 3px 3px #d6f4f6;
+}
+    #count1, #count2{
+        
+        text-align: center;
+        background-color: #e3f2fd;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-radius: 38px;
+        margin-bottom: 16px;
+        color:black;
+    }
+    #count2:hover, #count1:hover{
+      box-shadow: 0 5px 5px 5px #bbd2d7;
+    }
+    #col1:hover, #col2:hover,#col3:hover {
+      box-shadow: 0 3px 3px 3px #e3f2fd;
+      border-radius:15px;
+    }
+    #card-title1, #card-title2{
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #col1:hover,#col2:hover,#col3:hover{
+      background-color: #e3f2fd; 
+      border-radius:15px;
+    }
+    #debt{
+      margin-top: 8px;
+      margin-bottom: 1px;
+    }
+
+
+</style>
+<div class="container-fluid">
+  {% if message_text and message_text.message_date|date:'Y.m.d' == today|date:'Y.m.d' %}
+  <center style="margin-top: 15px;">
+    <div  class="row-cols-md-3 g-4">
+      <div class="card alert--info" id="message-card">
+       
+       <a style="color:black;" id="active2" class="nav-link active" href="{% url 'message_page' message_text.pk %}">
+        <div style="margin-left: 20px;margin-right:20px;" class="card-body">
+          {{message_text.message_title|title}}
+          <p class="card-text">{{ message_text.message_description|truncatewords:10 }}</p>
+          <sub style="float: right;">{{ message_text.message_date|date:'Y.m.d' }}</sub>
+        </div>
+        </a>
+
+      </div>
+    </div>
+  </center>
+{% endif %}
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+      var messageCard = document.getElementById('message-card');
+      if (messageCard) {
+        messageCard.style.display = 'none';
+      }
+    }, 2000);
+  });
+</script>
+
+
+  <div style="margin-top: 20px;" class="row row-cols-1 row-cols-md-3 g-4">
+  <i><div id="col1" class="col">
+    <div style="border-radius:15px;" id="card1" class="card">
+      <div id="card-body1" class="card-body">
+        <h5 id="card-title1" class="card-title">
+          {% trans "Mijozlar soni"|safe %} <hr>
+            <a class="nav-link" href="{% url 'userpages' user.pk %}">
+              <h2 id="count1" >{{client_count}}</h2></a>
+        </h5>
+        
+      </div>
+    </div>
+  </div></i>
+<i>
+  
+  <div id="col2" class="col">
+    <div style="border-radius:15px;" id="card2" class="card">
+      <div id="card-body2" class="card-body">
+        <h5 id="card-title2" class="card-title">
+            {% trans "Mahsulot turlari"|safe %} <hr>
+            <a class="nav-link" href="{% url 'add_product' %}">
+            <h2 id="count2" >{{count}}</h2>
+            </a>
+        </h5>
+      </div>
+    </div>
+  </div>
+
+</i>
+
+
+    <i>
+      <div id="col3" class="col">
+        <div style="border-radius:15px;" id="card3" class="card">
+          <!-- <img src="..." class="card-img-top" alt="..."> -->
+          <div class="card-body">
+            <h5 style="text-align: center;" class="card-title">
+              {% with month_number=to_month %}
+                {% if month_number == 1 %}{% trans "Yanvar" %}{% endif %}
+                {% if month_number == 2 %}{% trans "Fevral" %}{% endif %}
+                {% if month_number == 3 %}{% trans "Mart" %}{% endif %}
+                {% if month_number == 4 %}{% trans "Aprel" %}{% endif %}
+                {% if month_number == 5 %}{% trans "May" %}{% endif %}
+                {% if month_number == 6 %}{% trans "Iyun" %}{% endif %}
+                {% if month_number == 7 %}{% trans "Iyul" %}{% endif %}
+                {% if month_number == 8 %}{% trans "Avgust" %}{% endif %}
+                {% if month_number == 9 %}{% trans "Sentyabr" %}{% endif %}
+                {% if month_number == 10 %}{% trans "Oktyabr" %}{% endif %}
+                {% if month_number == 11 %}{% trans "Noyabr" %}{% endif %}
+                {% if month_number == 12 %}{% trans "Dekabr" %}{% endif %}
+              {% endwith %}
+            </h5>
+            <hr>
+            <p style="margin:0px; text-align:center;float:center"><sub>{% trans "oyidagi kirim chiqimlar"|title %} </sub></p>
+            <p id="debt" style="margin:2px;" class="card-text"><b>{% trans "Jami pul aylanmasi" %}: </b>{{to_sum_pay|floatformat:'0'|intcomma}} <sup>{% trans "so`m" %}</sup></p>
+            <p id="debt" style="margin:2px;" class="card-text"><b>{% trans "Qarzlar" %}: </b> {{to_sum_debt|floatformat:'0'|intcomma}} <sup>{% trans "so`m" %}</sup></p>
+            <p id="debt" style="margin:2px;" class="card-text"><b>{% trans "Jami pulning qarzga nisbati" %}: </b>{{b|floatformat:'2'}}%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </i>
+
+ <i> <h5 style="text-align:center; margin-top:50px;">{{ one_year }}- {% trans "yil qarz ko`rsatkichlari va mahsulotlar sotilish hajmi"|safe %}</h5></i>
+  <div style="display: flex;-content: space-between;" class="row row-cols-1 row-cols-md-2">
+  
+  <div>
+      <canvas style="width: 500px; height:300px;" id="debtChart"></canvas>
+      <script>
+          const monthlyDebts = {{ monthly_debts|safe }};
+          const ctx = document.getElementById('debtChart').getContext('2d');
+          const chart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                  datasets: [{
+                      label: 'Debt {{one_year}}',
+                      data: monthlyDebts,
+                      backgroundColor: 'rgba(255, 0, 0, 0.3)',
+                      borderColor: 'rgba(255, 0, 0, 1)',
+                      borderWidth: 1
+                  }]
+              },
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+      </script>
+  </div>
+  <div>
+      <canvas style="width: 500px; height:300px;" id="productChart"></canvas>
+      <script>
+          const productSales = {{ product_sales|safe }};
+          const productTypes = Object.keys(productSales);
+          const productCounts = Object.values(productSales);
+          const productChartCtx = document.getElementById('productChart').getContext('2d');
+          const productChart = new Chart(productChartCtx, {
+              type: 'bar',
+              data: {
+                  labels: productTypes,
+                  datasets: [{
+                      label: 'Mahsulotlar soni',
+                      data: productCounts,
+                      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                      borderColor: 'rgba(75, 192, 192, 1)',
+                      borderWidth: 1
+                  }]
+              },
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+      </script>
+  </div>
+</div>
+
+<div style="margin-top: 20px;" class="row row-cols-1 row-cols-md-2 g-4">
+  <div id="col1" class="col">
+    <div style="border-radius:15px;" id="card1" class="card">
+      <div id="card-body1" class="card-body">
+        <ul class="list-group list-group-flush scrollable-list">
+          <li class="list-group-item">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Morbi leo risus</li>
+          <li class="list-group-item">Porta ac consectetur ac</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+          <li class="list-group-item">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Morbi leo risus</li>
+          <li class="list-group-item">Porta ac consectetur ac</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+          <li class="list-group-item">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Morbi leo risus</li>
+          <li class="list-group-item">Porta ac consectetur ac</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="col1" class="col">
+    <div style="border-radius:15px;" id="card1" class="card">
+      <div id="card-body1" class="card-body">
+        <p>Foydalanuvchilar ro`yxati</p>
+        <ul class="list-group list-group-flush scrollable-list">
+          {% for client in client_list %}
+          <li class="list-group-item"><sub>{{ client.date|date:'d:F Y H:i' }}</sub><br>
+            <a href="{% url 'clientpage' client.pk %}">{{ client.name }} {{ client.surename }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+  
+
+</div>
+
+<script src="{% static 'js/app.js' %}"></script>
+
+{% endblock content %}
+
